@@ -1,20 +1,21 @@
 package com.selenium.saucedemo.pages;
 
+import com.selenium.saucedemo.utils.TestUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
     private final WebDriver driver;
 
-    private final By usernameField = By.id("user-name");
-    private final By passwordField = By.id("password");
-    private final By loginButton = By.id("login-button");
+    private final By usernameField = TestUtils.byDataTestId("username");
+    private final By passwordField = TestUtils.byDataTestId("password");
+    private final By loginButton = TestUtils.byDataTestId("login-button");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    // Helpers
+    // login helpers
     public void enterUsername(String username) {
         driver.findElement(usernameField).sendKeys(username);
     }
@@ -26,5 +27,4 @@ public class LoginPage {
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
-
 }
