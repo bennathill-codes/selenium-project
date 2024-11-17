@@ -21,6 +21,10 @@ public class ShoppingCartPage {
     public By shoppingCartBadge = TestUtils.byDataTestId("shopping-cart-badge");
 
     // shopping cart helper
+    public String getTitle() {
+        return driver.findElement(shoppingCartPageTitle).getText();
+    }
+
     public void removeAllProductsFromCart() {
         WebElement productsList = driver.findElement(shoppingCartList);
         List<WebElement> products = productsList.findElements(By.cssSelector("[data-test='inventory-item']"));
@@ -37,5 +41,13 @@ public class ShoppingCartPage {
 
     public String getShoppingCartBadge() {
         return driver.findElement(shoppingCartBadge).getText();
+    }
+
+    public void clickCheckoutButton() {
+        driver.findElement(checkoutButton).click();
+    }
+
+    public void clickContinueShoppingButton() {
+        driver.findElement(continueShoppingButton).click();
     }
 }
