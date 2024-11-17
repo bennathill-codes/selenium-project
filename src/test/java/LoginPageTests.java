@@ -39,4 +39,23 @@ public class LoginPageTests {
 
         assertThat(productPage.getTitle()).contains("Products");
     }
+
+    @Test
+    public void testLogout() throws InterruptedException {
+        productPage.clickMenu();
+        // wait due to menu open animation
+        Thread.sleep(1000);
+        productPage.clickLogout();
+
+        assertThat(loginPage.loginButton).isNotNull();
+    }
+
+    @Test
+    public void testInvalidLogin() {
+        loginPage.enterUsername("wrong_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLoginButton();
+
+        assertThat(loginPage.errorMessage).isNotNull();
+    }
 }

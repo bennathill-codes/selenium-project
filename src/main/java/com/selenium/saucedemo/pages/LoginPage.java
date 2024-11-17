@@ -9,7 +9,8 @@ public class LoginPage {
 
     private final By usernameField = TestUtils.byDataTestId("username");
     private final By passwordField = TestUtils.byDataTestId("password");
-    private final By loginButton = TestUtils.byDataTestId("login-button");
+    public final By loginButton = TestUtils.byDataTestId("login-button");
+    public final By errorMessage = TestUtils.byDataTestId("error");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
