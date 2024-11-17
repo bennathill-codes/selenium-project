@@ -1,4 +1,5 @@
 import com.selenium.saucedemo.pages.LoginPage;
+import com.selenium.saucedemo.pages.ProductPage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LoginPageTests {
     private static WebDriver driver;
     private static LoginPage loginPage;
+    private static ProductPage productPage;
 
     @BeforeClass
     public static void setUp() {
@@ -20,6 +22,8 @@ public class LoginPageTests {
         driver.get("https://www.saucedemo.com/");
 
         loginPage = new LoginPage(driver);
+        productPage = new ProductPage(driver);
+
     }
 
     @AfterClass
@@ -33,7 +37,6 @@ public class LoginPageTests {
         loginPage.enterPassword("secret_sauce");
         loginPage.clickLoginButton();
 
-        WebElement productPageHeader = driver.findElement(By.id("header_container"));
-        assertThat(productPageHeader).isNotNull();
+        assertThat(productPage.getTitle()).contains("Products");
     }
 }
