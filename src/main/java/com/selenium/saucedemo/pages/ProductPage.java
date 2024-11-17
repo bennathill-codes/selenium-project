@@ -16,7 +16,7 @@ public class ProductPage {
     }
 
     private final By productPageTitle = TestUtils.byDataTestId("title");
-    private final By productPageMenu = TestUtils.byDataTestId("open-menu");
+    private final By productPageLogout = TestUtils.byDataTestId("logout-sidebar-link");
     public final By productList = TestUtils.byDataTestId("inventory-list");
     public By productSortFilter = TestUtils.byDataTestId("product-sort-container");
     public By shoppingCartBadge = TestUtils.byDataTestId("shopping-cart-badge");
@@ -27,7 +27,11 @@ public class ProductPage {
     }
 
     public void clickMenu() {
-        driver.findElement(productPageMenu).click();
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+    }
+
+    public void clickLogout() {
+        driver.findElement(productPageLogout).click();
     }
 
     public void addAllProductsToCart() {
