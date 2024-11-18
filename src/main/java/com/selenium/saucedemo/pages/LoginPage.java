@@ -16,7 +16,7 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    // login helpers
+    // login page helper methods
     public void enterUsername(String username) {
         driver.findElement(usernameField).sendKeys(username);
     }

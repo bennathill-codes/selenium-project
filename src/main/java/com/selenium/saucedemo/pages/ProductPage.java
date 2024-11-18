@@ -22,7 +22,7 @@ public class ProductPage {
     public By shoppingCartBadge = TestUtils.byDataTestId("shopping-cart-badge");
     public By shoppingCartLink = TestUtils.byDataTestId("shopping-cart-link");
 
-    // product helpers
+    // product page helper methods
     public String getTitle() {
         return driver.findElement(productPageTitle).getText();
     }
