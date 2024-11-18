@@ -20,7 +20,7 @@ public class ShoppingCartPage {
     public final By shoppingCartList = TestUtils.byDataTestId("cart-list");
     public By shoppingCartBadge = TestUtils.byDataTestId("shopping-cart-badge");
 
-    // shopping cart helper
+    // shopping cart page helper methods
     public String getTitle() {
         return driver.findElement(shoppingCartPageTitle).getText();
     }

@@ -17,4 +17,24 @@ public class CheckoutPage {
     private final By continueButton = TestUtils.byDataTestId("continue");
     private final By cancelButton = TestUtils.byDataTestId("cancel");
 
+    // checkout page helper methods
+    public void enterFirstName(String firstName) {
+        driver.findElement(firstNameField).sendKeys(firstName);
+    }
+
+    public void enterLastName(String lastName) {
+        driver.findElement(lastNameField).sendKeys(lastName);
+    }
+
+    public void enterPostalCode(String zip) {
+        driver.findElement(postalCodeField).sendKeys(zip);
+    }
+
+    public void clickContinueButton() {
+        driver.findElement(continueButton).click();
+    }
+
+    public void clickCancelButton() {
+        driver.findElement(cancelButton).click();
+    }
 }
