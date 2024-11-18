@@ -20,7 +20,7 @@ public class LoginPageTests {
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
 
-        // poms
+        // page object models
         loginPage = new LoginPage(driver);
         productPage = new ProductPage(driver);
     }

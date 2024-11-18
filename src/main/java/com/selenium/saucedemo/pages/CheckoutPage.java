@@ -11,13 +11,23 @@ public class CheckoutPage {
         this.driver = driver;
     }
 
+    private final By checkoutPageTitle = TestUtils.byDataTestId("title");
     private final By firstNameField = TestUtils.byDataTestId("firstName");
     private final By lastNameField = TestUtils.byDataTestId("lastName");
     private final By postalCodeField = TestUtils.byDataTestId("postalCode");
     private final By continueButton = TestUtils.byDataTestId("continue");
     private final By cancelButton = TestUtils.byDataTestId("cancel");
+    private final By errorMessage = TestUtils.byDataTestId("error");
 
     // checkout page helper methods
+    public String getTitle() {
+        return driver.findElement(checkoutPageTitle).getText();
+    }
+
+    public String getErrorMessage() {
+        return driver.findElement(errorMessage).getText();
+    }
+
     public void enterFirstName(String firstName) {
         driver.findElement(firstNameField).sendKeys(firstName);
     }
