@@ -20,6 +20,7 @@ public class ProductPage {
     public final By productList = TestUtils.byDataTestId("inventory-list");
     public By productSortFilter = TestUtils.byDataTestId("product-sort-container");
     public By shoppingCartBadge = TestUtils.byDataTestId("shopping-cart-badge");
+    public By shoppingCartLink = TestUtils.byDataTestId("shopping-cart-link");
 
     // product helpers
     public String getTitle() {
@@ -32,6 +33,10 @@ public class ProductPage {
 
     public void clickLogout() {
         driver.findElement(productPageLogout).click();
+    }
+
+    public void clickShoppingCartLink() {
+        driver.findElement(shoppingCartLink).click();
     }
 
     public void addAllProductsToCart() {
