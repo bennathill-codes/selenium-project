@@ -1,21 +1,23 @@
+package com.selenium.saucedemo.end2end;
+
+import com.selenium.saucedemo.pages.CheckoutPage;
 import com.selenium.saucedemo.pages.LoginPage;
 import com.selenium.saucedemo.pages.ProductPage;
 import com.selenium.saucedemo.pages.ShoppingCartPage;
-import com.selenium.saucedemo.utils.TestUtils;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShoppingCartTests {
+public class EndToEndTest {
     private static WebDriver driver;
     private static LoginPage loginPage;
     private static ProductPage productPage;
     private static ShoppingCartPage shoppingCartPage;
+    private static CheckoutPage checkoutPage;
 
     @Before
     public void setUp() {
@@ -23,15 +25,11 @@ public class ShoppingCartTests {
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
 
-        // poms
+        // page object models
         loginPage = new LoginPage(driver);
         productPage = new ProductPage(driver);
         shoppingCartPage = new ShoppingCartPage(driver);
-
-        // navigate to shopping cart page
-        TestUtils.login(driver);
-        productPage.addAllProductsToCart();
-        productPage.clickShoppingCartLink();
+        checkoutPage = new CheckoutPage(driver);
     }
 
     @After
@@ -40,24 +38,25 @@ public class ShoppingCartTests {
     }
 
     @Test
-    public void testRemoveProductsFromCart() {
-        assertThat(shoppingCartPage.getShoppingCartBadge()).contains("6");
-        shoppingCartPage.removeAllProductsFromCart();
-        assertThat(shoppingCartPage.shoppingCartBadgeDisplayed()).isFalse();
-    }
-
-    @Test
-    public void testContinueShopping() {
-        shoppingCartPage.clickContinueShoppingButton();
+    public void testEndToEnd() {
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLoginButton();
         assertThat(productPage.getTitle()).contains("Products");
-        productPage.clickShoppingCartLink();
-        assertThat(shoppingCartPage.getTitle()).contains("Your Cart");
-    }
 
-    @Test
-    public void testShoppingCartCheckout() {
+        productPage.addAllProductsToCart();
+        productPage.clickShoppingCartLink();
+        assertThat(shoppingCartPage.getTitle()).contains("Cart");
+
         shoppingCartPage.clickCheckoutButton();
-        WebElement checkoutPageTitle = driver.findElement(TestUtils.byDataTestId("title"));
-        assertThat(checkoutPageTitle.getText()).contains("Checkout");
+        assertThat(checkoutPage.getTitle()).contains("Checkout");
+
+        checkoutPage.enterFirstName("Coco");
+        checkoutPage.enterLastName("Bean");
+        checkoutPage.enterPostalCode("12345");
+        checkoutPage.clickContinueButton();
+        assertThat(checkoutPage.getTitle()).contains("Overview");
+        checkoutPage.clickFinishButton();
+        assertThat(checkoutPage.getTitle()).contains("Complete!");
     }
 }
