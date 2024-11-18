@@ -17,6 +17,7 @@ public class CheckoutPage {
     private final By postalCodeField = TestUtils.byDataTestId("postalCode");
     private final By continueButton = TestUtils.byDataTestId("continue");
     private final By cancelButton = TestUtils.byDataTestId("cancel");
+    private final By finishButton = TestUtils.byDataTestId("finish");
     private final By errorMessage = TestUtils.byDataTestId("error");
 
     // checkout page helper methods
@@ -46,5 +47,9 @@ public class CheckoutPage {
 
     public void clickCancelButton() {
         driver.findElement(cancelButton).click();
+    }
+
+    public void clickFinishButton() {
+        driver.findElement(finishButton).click();
     }
 }

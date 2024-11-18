@@ -1,3 +1,5 @@
+package com.selenium.saucedemo.integration;
+
 import com.selenium.saucedemo.pages.LoginPage;
 import com.selenium.saucedemo.pages.ProductPage;
 import com.selenium.saucedemo.utils.TestUtils;
@@ -9,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginPageTests {
+public class LoginPageTest {
     private static WebDriver driver;
     private static LoginPage loginPage;
     private static ProductPage productPage;
