@@ -17,7 +17,7 @@ public class ShoppingCartPage {
     private final By shoppingCartPageTitle = TestUtils.byDataTestId("title");
     private final By checkoutButton = TestUtils.byDataTestId("checkout");
     private final By continueShoppingButton = TestUtils.byDataTestId("continue-shopping");
-    public final By shoppingCartList = TestUtils.byDataTestId("cart_list");
+    public final By shoppingCartList = TestUtils.byDataTestId("cart-list");
     public By shoppingCartBadge = TestUtils.byDataTestId("shopping-cart-badge");
 
     // shopping cart helper
@@ -26,8 +26,8 @@ public class ShoppingCartPage {
     }
 
     public void removeAllProductsFromCart() {
-        WebElement productsList = driver.findElement(shoppingCartList);
-        List<WebElement> products = productsList.findElements(By.cssSelector("[data-test='inventory-item']"));
+        WebElement cartList = driver.findElement(shoppingCartList);
+        List<WebElement> products = cartList.findElements(By.cssSelector("[data-test='inventory-item']"));
 
         for (WebElement product : products) {
             WebElement removeFromCartButton = product.findElement(By.cssSelector("[data-test^='remove']"));

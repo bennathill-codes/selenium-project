@@ -2,10 +2,11 @@ import com.selenium.saucedemo.pages.LoginPage;
 import com.selenium.saucedemo.pages.ProductPage;
 import com.selenium.saucedemo.pages.ShoppingCartPage;
 import com.selenium.saucedemo.utils.TestUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,8 +17,8 @@ public class ShoppingCartTests {
     private static ProductPage productPage;
     private static ShoppingCartPage shoppingCartPage;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
@@ -27,14 +28,22 @@ public class ShoppingCartTests {
         productPage = new ProductPage(driver);
         shoppingCartPage = new ShoppingCartPage(driver);
 
+        // navigate to shopping cart page
         TestUtils.login(driver);
         productPage.addAllProductsToCart();
         productPage.clickShoppingCartLink();
     }
 
-    @AfterClass
-    public static void tearDown() {
+    @After
+    public void tearDown() {
         driver.quit();
+    }
+
+    @Test
+    public void testRemoveProductsFromCart() {
+        assertThat(shoppingCartPage.getShoppingCartBadge()).contains("6");
+        shoppingCartPage.removeAllProductsFromCart();
+        assertThat(shoppingCartPage.shoppingCartBadgeDisplayed()).isFalse();
     }
 
     @Test
@@ -43,5 +52,12 @@ public class ShoppingCartTests {
         assertThat(productPage.getTitle()).contains("Products");
         productPage.clickShoppingCartLink();
         assertThat(shoppingCartPage.getTitle()).contains("Your Cart");
+    }
+
+    @Test
+    public void testShoppingCartCheckout() {
+        shoppingCartPage.clickCheckoutButton();
+        WebElement checkoutPageTitle = driver.findElement(TestUtils.byDataTestId("title"));
+        assertThat(checkoutPageTitle.getText()).contains("Checkout");
     }
 }
