@@ -1,10 +1,9 @@
 import com.selenium.saucedemo.pages.LoginPage;
 import com.selenium.saucedemo.pages.ProductPage;
 import com.selenium.saucedemo.utils.TestUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Order;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,8 +15,8 @@ public class ProductPageTests {
     private static LoginPage loginPage;
     private static ProductPage productPage;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
@@ -30,8 +29,8 @@ public class ProductPageTests {
         TestUtils.login(driver);
     }
 
-    @AfterClass
-    public static void tearDown() {
+    @After
+    public void tearDown() {
         driver.quit();
     }
 
